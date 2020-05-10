@@ -10,7 +10,7 @@ pipeline {
                      echo "Multiline shell steps works too"
                      ls -lah
                  '''
-                 sh 'sudo apt install tidy -y'
+                 sh 'apt install tidy -y'
              }
          }
          stage('Lint HTML') {
