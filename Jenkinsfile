@@ -1,35 +1,12 @@
 pipeline {
-     agent {
-         docker { image 'ubuntu:18.04' }
-     }
-     stages {
-         stage('Build') {
-             steps {
-                 sh 'echo "Hello World"'
-                 sh '''
-                     echo "Multiline shell steps works too"
-                     ls -lah
-                 '''
-                 sh 'apt install tidy -y'
-             }
-         }
-         stage('Lint HTML') {
-              steps {
-                  sh 'tidy -q -e *.html'
-              }
-         }
-         stage('Security Scan') {
-              steps { 
-                 aquaMicroscanner imageName: 'alpine:latest', notCompleted: 'exit 1', onDisallowed: 'fail'
-              }
-         }         
-         stage('Upload to AWS') {
-              steps {
-                  withAWS(region:'us-east-2',credentials:'aws-static') {
-                  sh 'echo "Uploading content with AWS creds"'
-                      s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:'index.html', bucket:'static-jenkins-pipeline')
-                  }
-              }
-         }
-     }
+    agent {
+        docker { image 'node:7-alpine' }
+    }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'node --version'
+            }
+        }
+    }
 }
