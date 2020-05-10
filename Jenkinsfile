@@ -5,7 +5,7 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'apt install tidy -y'
+                sh 'sudo apt-get install tidy -y'
                 sh 'uname -a'
             }
         }
