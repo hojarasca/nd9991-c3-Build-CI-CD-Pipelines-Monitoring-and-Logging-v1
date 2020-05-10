@@ -1,11 +1,11 @@
 pipeline {
     agent {
-        docker { image 'node:7-alpine' }
+        docker { image 'imega/tidy' }
     }
     stages {
         stage('Test') {
             steps {
-                sh 'uname -a'
+                sh 'tidy --version'
             }
         }
     }
