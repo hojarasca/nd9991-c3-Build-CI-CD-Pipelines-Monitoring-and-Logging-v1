@@ -1,5 +1,7 @@
 pipeline {
-     agent any
+     agent {
+         docker { image 'ubuntu:18.04' }
+     }
      stages {
          stage('Build') {
              steps {
@@ -8,6 +10,7 @@ pipeline {
                      echo "Multiline shell steps works too"
                      ls -lah
                  '''
+                 sh 'sudo apt install tidy -y'
              }
          }
          stage('Lint HTML') {
